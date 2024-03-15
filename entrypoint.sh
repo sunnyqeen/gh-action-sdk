@@ -27,15 +27,15 @@ if [ -n "$KEY_BUILD" ]; then
 	SIGNED_PACKAGES="y"
 fi
 
+echo "src-link $FEEDNAME /feed/" > feeds.conf
+
 if [ -z "$NO_DEFAULT_FEEDS" ]; then
 	sed \
 		-e 's,https://git.openwrt.org/feed/,https://github.com/openwrt/,' \
 		-e 's,https://git.openwrt.org/openwrt/,https://github.com/openwrt/,' \
 		-e 's,https://git.openwrt.org/project/,https://github.com/openwrt/,' \
-		feeds.conf.default > feeds.conf
+		feeds.conf.default >> feeds.conf
 fi
-
-echo "src-link $FEEDNAME /feed/" >> feeds.conf
 
 ALL_CUSTOM_FEEDS="$FEEDNAME "
 #shellcheck disable=SC2153
