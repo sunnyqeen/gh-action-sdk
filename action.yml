@@ -27,10 +27,10 @@ runs:
         tags: sdk
         context: ${{ github.action_path }}
         build-args: |
-          CONTAINER
-          ARCH
-        cache-to: type=gha,mode=max,scope=${{ env.CONTAINER }}-${{ env.ARCH }}
-        cache-from: type=gha,scope=${{ env.CONTAINER }}-${{ env.ARCH }}
+          VERSION_PATH
+          TARGET
+        cache-to: type=gha,mode=max,scope=${{ env.VERSION_PATH }}-${{ env.TARGET }}
+        cache-from: type=gha,scope=${{ env.VERSION_PATH }}-${{ env.TARGET }}
         load: true
 
     - run: |
