@@ -13,7 +13,7 @@ runs:
       shell: bash
     - run: |
         echo "::group::  docker build -t sdk $GITHUB_ACTION_PATH"
-        docker build --build-arg CONTAINER --build-arg ARCH -t sdk $GITHUB_ACTION_PATH
+        docker build --build-arg VERSION_PATH --build-arg TARGET -t sdk $GITHUB_ACTION_PATH
         echo "::endgroup::"
       shell: bash
     - run: |
