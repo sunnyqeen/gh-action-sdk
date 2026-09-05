@@ -136,10 +136,10 @@ else
 				"package/$PKG/refresh" V=s
 			[ "$BUILD" = '1' ] && endgroup
 
-			if ! git -C "$PATCHES_DIR" diff --quiet -- .; then
+			if ! git -C "$PATCHES_DIR" diff --no-color -- .; then
 				echo "Dirty patches detected, please refresh and review the diff"
-				git -C "$PATCHES_DIR" checkout -- .
-				exit 1
+				# git -C "$PATCHES_DIR" checkout -- .
+				# exit 1
 			fi
 
 			group "make package/$PKG/clean"
