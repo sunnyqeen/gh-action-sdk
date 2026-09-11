@@ -43,10 +43,19 @@ fi
 echo "src-link $FEEDNAME /feed/" > feeds.conf
 
 if [ -z "$NO_DEFAULT_FEEDS" ]; then
+	if [ "$VERSION_PATH" = "snapshots" ]; then
+		FEED_BRANCH="main"
+	else
+		# Matches optional prefix (like 'release/') followed by X.Y digits
+		BASE_VERSION=$(echo "$VERSION_PATH" | sed -E 's|^([^0-9]*/)*([0-9]+\.[0-9]+).*|\2|')
+		FEED_BRANCH="openwrt-$BASE_VERSION"
+	fi
+
 	sed \
 		-e 's,https://git.openwrt.org/feed/,https://github.com/openwrt/,' \
 		-e 's,https://git.openwrt.org/openwrt/,https://github.com/openwrt/,' \
 		-e 's,https://git.openwrt.org/project/,https://github.com/openwrt/,' \
+		-e "s|\(\.git\)[^ ]*\^[a-fA-F0-9]*|\1;${FEED_BRANCH}|g" \
 		feeds.conf.default >> feeds.conf
 fi
 
