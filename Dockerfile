@@ -5,6 +5,13 @@
 ARG BASE_IMAGE=ghcr.io/openwrt/buildbot/buildworker-v3.11.8:v21
 
 FROM $BASE_IMAGE
+
+# Install clang development libraries
+USER root
+RUN apt-get update && apt-get install -y \
+    libclang-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 ARG USER=buildbot
 ARG WORKDIR=/builder/
 ARG CMD="/bin/bash"

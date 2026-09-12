@@ -175,6 +175,9 @@ else
 		exit
 	fi
 
+	export LIBCLANG_PATH=$(dirname $(find /usr/lib/ -name "libclang.so*" | head -n 1))
+	echo LIBCLANG_PATH=$LIBCLANG_PATH
+
 	make \
 		-f .config \
 		-f tmp/.packagedeps \
